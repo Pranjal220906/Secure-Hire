@@ -7,35 +7,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --red: #E02020;
-      --red-dark: #B91C1C;
-      --red-light: #FEE2E2;
-      --black: #0A0A0A;
-      --grey: #F5F5F5;
-      --mid: #6B7280;
-      --white: #ffffff;
-      --gold: #F59E0B;
-      --green: #10B981;
+      --red: #E02020; --red-dark: #B91C1C; --red-light: #FEE2E2;
+      --black: #0A0A0A; --grey: #F5F5F5; --mid: #6B7280;
+      --white: #ffffff; --gold: #F59E0B; --green: #10B981;
     }
-
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 5%; height: 68px;
-      background: var(--white);
-      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,.08);
     }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--red); display: grid; place-items: center;
-    }
+    .logo-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--red); display: grid; place-items: center; }
     .logo-icon svg { width: 22px; height: 22px; fill: var(--white); }
     .logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--black); }
     .nav-links { display: flex; gap: 30px; list-style: none; }
@@ -50,26 +38,40 @@
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger span { width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
 
-    /* ── HERO ── */
+    /* LOCATION BAR */
+    .location-bar {
+      background: #FFF7ED; border-bottom: 1px solid #FED7AA;
+      padding: 10px 5%; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .loc-label { font-size: .82rem; color: #92400E; font-weight: 500; display: flex; align-items: center; gap: 5px; }
+    .loc-display {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--white); border: 1px solid #FED7AA; border-radius: 20px;
+      padding: 5px 14px; font-size: .85rem; color: var(--black); font-weight: 500; flex: 1; max-width: 360px;
+    }
+    .loc-display span { flex: 1; color: #9CA3AF; }
+    .loc-detect-btn {
+      background: var(--red); color: var(--white); border: none; border-radius: 20px;
+      padding: 6px 16px; font-size: .82rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: 6px; transition: background .2s;
+      white-space: nowrap;
+    }
+    .loc-detect-btn:hover { background: var(--red-dark); }
+    .loc-detecting { color: #92400E; font-size: .8rem; display: none; align-items: center; gap: 6px; }
+    .spinner {
+      width: 14px; height: 14px; border: 2px solid #FED7AA;
+      border-top-color: var(--red); border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* HERO */
     .hero {
       background: linear-gradient(135deg, var(--red) 0%, #C41A1A 60%, #8B0000 100%);
-      padding: 80px 5% 90px;
-      position: relative; overflow: hidden;
+      padding: 80px 5% 90px; position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 400px; height: 400px;
-      background: rgba(255,255,255,.06);
-      border-radius: 50%;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: -100px; left: 40%;
-      width: 300px; height: 300px;
-      background: rgba(255,255,255,.04);
-      border-radius: 50%;
-    }
+    .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; background: rgba(255,255,255,.06); border-radius: 50%; }
+    .hero::after { content: ''; position: absolute; bottom: -100px; left: 40%; width: 300px; height: 300px; background: rgba(255,255,255,.04); border-radius: 50%; }
     .hero-content { max-width: 700px; position: relative; z-index: 1; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 7px;
@@ -78,11 +80,7 @@
       padding: 6px 14px; font-size: .8rem; font-weight: 500;
       margin-bottom: 22px; backdrop-filter: blur(6px);
     }
-    .hero h1 {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      color: var(--white); line-height: 1.1; margin-bottom: 14px;
-    }
+    .hero h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--white); line-height: 1.1; margin-bottom: 14px; }
     .hero p { color: rgba(255,255,255,.85); font-size: 1.05rem; line-height: 1.6; margin-bottom: 36px; max-width: 540px; }
     .search-bar {
       display: flex; background: var(--white); border-radius: 50px;
@@ -90,10 +88,7 @@
       max-width: 560px; box-shadow: 0 8px 30px rgba(0,0,0,.2);
     }
     .search-bar svg { width: 20px; height: 20px; fill: var(--mid); flex-shrink: 0; }
-    .search-bar input {
-      flex: 1; border: none; outline: none; font-family: 'DM Sans', sans-serif;
-      font-size: .95rem; color: var(--black);
-    }
+    .search-bar input { flex: 1; border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: .95rem; color: var(--black); }
     .search-bar input::placeholder { color: #9CA3AF; }
     .search-btn {
       background: var(--red); color: var(--white); border: none; border-radius: 40px;
@@ -101,14 +96,11 @@
       cursor: pointer; white-space: nowrap; transition: background .2s;
     }
     .search-btn:hover { background: var(--red-dark); }
-    .hero-stats {
-      display: flex; gap: 36px; margin-top: 40px; flex-wrap: wrap;
-    }
-    .stat { }
+    .hero-stats { display: flex; gap: 36px; margin-top: 40px; flex-wrap: wrap; }
     .stat-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--white); }
     .stat-label { font-size: .8rem; color: rgba(255,255,255,.7); margin-top: 2px; }
 
-    /* ── SECTIONS SHARED ── */
+    /* SECTIONS */
     section { padding: 70px 5%; }
     .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
     .section-header h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.7rem; }
@@ -116,72 +108,43 @@
     .see-all { color: var(--red); font-weight: 600; font-size: .9rem; text-decoration: none; white-space: nowrap; transition: opacity .2s; }
     .see-all:hover { opacity: .75; }
 
-    /* ── CATEGORIES ── */
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 16px;
-    }
+    /* CATEGORIES */
+    .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
     .cat-card {
       background: var(--white); border: 1.5px solid #E5E7EB; border-radius: 16px;
       padding: 22px 12px; text-align: center; cursor: pointer;
       transition: border-color .2s, transform .2s, box-shadow .2s;
     }
     .cat-card:hover { border-color: var(--red); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(224,32,32,.12); }
-    .cat-icon {
-      width: 56px; height: 56px; border-radius: 14px;
-      display: grid; place-items: center; margin: 0 auto 12px;
-      font-size: 1.6rem;
-    }
+    .cat-icon { width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; margin: 0 auto 12px; font-size: 1.6rem; }
     .cat-card span { font-weight: 600; font-size: .82rem; color: var(--black); line-height: 1.3; display: block; }
+    .c1{background:#EDE9FE}.c2{background:#FEF3C7}.c3{background:#D1FAE5}
+    .c4{background:#DBEAFE}.c5{background:#FCE7F3}.c6{background:#E0F2FE}
+    .c7{background:#FEE2E2}.c8{background:#F3F4F6}.c9{background:#FEF9C3}
+    .c10{background:#CCFBF1}.c11{background:#FFE4E6}.c12{background:#EFF6FF}
 
-    /* category colors */
-    .c1 { background: #EDE9FE; } .c2 { background: #FEF3C7; } .c3 { background: #D1FAE5; }
-    .c4 { background: #DBEAFE; } .c5 { background: #FCE7F3; } .c6 { background: #E0F2FE; }
-    .c7 { background: #FEE2E2; } .c8 { background: #F3F4F6; } .c9 { background: #FEF9C3; }
-    .c10 { background: #CCFBF1; } .c11 { background: #FFE4E6; } .c12 { background: #EFF6FF; }
-
-    /* ── FEATURED GUARDS ── */
+    /* GUARDS */
     .guards-grid { display: flex; flex-direction: column; gap: 16px; }
     .guard-card {
       display: flex; gap: 16px; align-items: flex-start;
       background: var(--white); border: 1.5px solid #E5E7EB; border-radius: 16px;
-      padding: 18px; cursor: pointer;
-      transition: border-color .2s, box-shadow .2s;
+      padding: 18px; cursor: pointer; transition: border-color .2s, box-shadow .2s;
     }
     .guard-card:hover { border-color: var(--red); box-shadow: 0 6px 20px rgba(224,32,32,.1); }
     .guard-img-wrap { position: relative; flex-shrink: 0; }
-    .guard-img {
-      width: 80px; height: 80px; border-radius: 14px; object-fit: cover;
-      background: var(--grey); display: flex; align-items: center; justify-content: center;
-      font-size: 2rem;
-    }
-    .verified-badge {
-      position: absolute; bottom: -4px; right: -4px;
-      width: 22px; height: 22px; border-radius: 50%;
-      background: #2563EB; border: 2px solid var(--white);
-      display: grid; place-items: center;
-    }
+    .guard-img { width: 80px; height: 80px; border-radius: 14px; background: var(--grey); display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    .verified-badge { position: absolute; bottom: -4px; right: -4px; width: 22px; height: 22px; border-radius: 50%; background: #2563EB; border: 2px solid var(--white); display: grid; place-items: center; }
     .verified-badge svg { width: 12px; height: 12px; fill: var(--white); }
     .guard-info { flex: 1; min-width: 0; }
     .guard-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
     .guard-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; }
-    .featured-tag {
-      background: var(--red); color: var(--white); border-radius: 20px;
-      padding: 3px 10px; font-size: .72rem; font-weight: 700; flex-shrink: 0;
-    }
+    .featured-tag { background: var(--red); color: var(--white); border-radius: 20px; padding: 3px 10px; font-size: .72rem; font-weight: 700; flex-shrink: 0; }
     .rating { display: flex; align-items: center; gap: 5px; margin: 6px 0; }
-    .rating-score {
-      background: #16A34A; color: var(--white); border-radius: 6px;
-      padding: 2px 7px; font-size: .78rem; font-weight: 700;
-    }
+    .rating-score { background: #16A34A; color: var(--white); border-radius: 6px; padding: 2px 7px; font-size: .78rem; font-weight: 700; }
     .rating-reviews { font-size: .8rem; color: var(--mid); }
     .guard-meta { font-size: .82rem; color: var(--mid); margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
     .guard-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag {
-      background: var(--red-light); color: var(--red-dark); border-radius: 20px;
-      padding: 3px 10px; font-size: .75rem; font-weight: 500;
-    }
+    .tag { background: var(--red-light); color: var(--red-dark); border-radius: 20px; padding: 3px 10px; font-size: .75rem; font-weight: 500; }
     .guard-price { text-align: right; flex-shrink: 0; }
     .price-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--red); }
     .price-label { font-size: .75rem; color: var(--mid); }
@@ -192,79 +155,103 @@
     }
     .book-btn:hover { background: var(--red-dark); }
 
-    /* ── HOW IT WORKS ── */
+    /* BOOKING MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 20px; width: 100%; max-width: 480px;
+      overflow: hidden; animation: fadeUp .3s ease;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .modal-step { padding: 32px; display: none; }
+    .modal-step.active { display: block; }
+    .modal-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 6px; }
+    .modal-sub { font-size: .85rem; color: var(--mid); margin-bottom: 24px; }
+    .modal-guard-info { display: flex; align-items: center; gap: 12px; background: var(--grey); border-radius: 12px; padding: 14px; margin-bottom: 20px; }
+    .modal-guard-emoji { font-size: 2rem; }
+    .modal-guard-name { font-weight: 700; font-size: 1rem; }
+    .modal-guard-rate { font-size: .82rem; color: var(--mid); }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: .82rem; font-weight: 600; color: var(--black); margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; border: 1.5px solid #E5E7EB; border-radius: 10px;
+      padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      color: var(--black); outline: none; transition: border-color .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--red); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .modal-footer { display: flex; gap: 10px; margin-top: 24px; }
+    .btn-modal-back { flex: 1; background: var(--grey); color: var(--black); border: none; border-radius: 12px; padding: 12px; font-weight: 600; font-size: .9rem; cursor: pointer; }
+    .btn-modal-next { flex: 2; background: var(--red); color: var(--white); border: none; border-radius: 12px; padding: 12px; font-weight: 700; font-size: .9rem; cursor: pointer; transition: background .2s; }
+    .btn-modal-next:hover { background: var(--red-dark); }
+    .modal-close { float: right; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--mid); margin-bottom: -10px; }
+    .step-indicator { display: flex; gap: 6px; margin-bottom: 20px; }
+    .step-dot { width: 8px; height: 8px; border-radius: 50%; background: #E5E7EB; transition: background .3s; }
+    .step-dot.active { background: var(--red); width: 20px; border-radius: 4px; }
+    .step-dot.done { background: var(--green); }
+    /* Payment Coming Soon */
+    .coming-soon-box {
+      text-align: center; padding: 32px 20px;
+      background: linear-gradient(135deg, #FFF7ED, #FEE2E2);
+      border-radius: 16px; border: 2px dashed #FCA5A5;
+    }
+    .coming-soon-box .cs-icon { font-size: 3rem; margin-bottom: 12px; }
+    .coming-soon-box h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--red-dark); margin-bottom: 8px; }
+    .coming-soon-box p { font-size: .85rem; color: #9B1C1C; line-height: 1.6; }
+    .coming-soon-box .notify-btn {
+      display: inline-block; margin-top: 16px; background: var(--red); color: var(--white);
+      border: none; border-radius: 20px; padding: 10px 24px;
+      font-weight: 700; font-size: .88rem; cursor: pointer;
+    }
+    .summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #F3F4F6; font-size: .88rem; }
+    .summary-row:last-child { border: none; font-weight: 700; font-size: 1rem; color: var(--red); }
+
+    /* HOW IT WORKS */
     .how-it-works { background: var(--grey); border-radius: 24px; margin: 0 5%; padding: 60px 5%; }
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-top: 40px; }
     .step { text-align: center; }
-    .step-num {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--red); color: var(--white);
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem;
-      display: grid; place-items: center; margin: 0 auto 16px;
-    }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--red); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; display: grid; place-items: center; margin: 0 auto 16px; }
     .step h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
     .step p { font-size: .85rem; color: var(--mid); line-height: 1.6; }
 
-    /* ── WHY SECUREHIRE ── */
+    /* WHY */
     .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .why-card {
-      border: 1.5px solid #E5E7EB; border-radius: 16px; padding: 28px 22px;
-      transition: border-color .2s, box-shadow .2s;
-    }
+    .why-card { border: 1.5px solid #E5E7EB; border-radius: 16px; padding: 28px 22px; transition: border-color .2s, box-shadow .2s; }
     .why-card:hover { border-color: var(--red); box-shadow: 0 4px 16px rgba(224,32,32,.08); }
     .why-icon { font-size: 2rem; margin-bottom: 14px; }
     .why-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
     .why-card p { font-size: .85rem; color: var(--mid); line-height: 1.6; }
 
-    /* ── TESTIMONIALS ── */
+    /* TESTIMONIALS */
     .testimonials { background: linear-gradient(135deg, var(--red) 0%, #8B0000 100%); border-radius: 24px; margin: 0 5%; padding: 60px 5%; }
     .testimonials .section-header h2 { color: var(--white); }
     .testimonials .section-header p { color: rgba(255,255,255,.7); }
     .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .testi-card {
-      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
-      border-radius: 16px; padding: 24px; backdrop-filter: blur(8px);
-    }
+    .testi-card { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 16px; padding: 24px; backdrop-filter: blur(8px); }
     .testi-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 12px; }
     .testi-text { color: rgba(255,255,255,.9); font-size: .9rem; line-height: 1.6; margin-bottom: 16px; }
     .testi-author { display: flex; align-items: center; gap: 10px; }
-    .testi-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: rgba(255,255,255,.25); display: grid; place-items: center; font-size: 1.2rem;
-    }
+    .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.25); display: grid; place-items: center; font-size: 1.2rem; }
     .testi-name { color: var(--white); font-weight: 600; font-size: .9rem; }
     .testi-role { color: rgba(255,255,255,.65); font-size: .78rem; }
 
-    /* ── CTA BANNER ── */
-    .cta-banner {
-      background: var(--black); color: var(--white); border-radius: 24px;
-      margin: 0 5%; padding: 60px 5%;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 30px; flex-wrap: wrap;
-    }
+    /* CTA */
+    .cta-banner { background: var(--black); color: var(--white); border-radius: 24px; margin: 0 5%; padding: 60px 5%; display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
     .cta-banner h2 { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; max-width: 440px; line-height: 1.2; }
     .cta-banner h2 span { color: var(--red); }
     .cta-banner p { color: rgba(255,255,255,.65); margin-top: 10px; font-size: .9rem; }
     .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--red); color: var(--white); border: none; border-radius: 30px;
-      padding: 13px 28px; font-family: 'DM Sans', sans-serif; font-weight: 700;
-      font-size: .95rem; cursor: pointer; transition: background .2s, transform .15s;
-    }
+    .btn-primary { background: var(--red); color: var(--white); border: none; border-radius: 30px; padding: 13px 28px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: .95rem; cursor: pointer; transition: background .2s, transform .15s; }
     .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
-    .btn-outline {
-      background: transparent; color: var(--white);
-      border: 2px solid rgba(255,255,255,.3); border-radius: 30px;
-      padding: 13px 28px; font-family: 'DM Sans', sans-serif; font-weight: 600;
-      font-size: .95rem; cursor: pointer; transition: border-color .2s;
-    }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.3); border-radius: 30px; padding: 13px 28px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .95rem; cursor: pointer; transition: border-color .2s; }
     .btn-outline:hover { border-color: var(--white); }
 
-    /* ── FOOTER ── */
-    footer {
-      background: #0A0A0A; color: rgba(255,255,255,.6);
-      padding: 60px 5% 30px;
-    }
+    /* FOOTER */
+    footer { background: #0A0A0A; color: rgba(255,255,255,.6); padding: 60px 5% 30px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
     .footer-brand p { font-size: .85rem; line-height: 1.7; margin-top: 14px; max-width: 280px; }
     .footer-col h4 { color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: .95rem; margin-bottom: 16px; }
@@ -272,18 +259,13 @@
     .footer-col li { margin-bottom: 10px; }
     .footer-col a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .85rem; transition: color .2s; }
     .footer-col a:hover { color: var(--red); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 12px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
     .footer-bottom p { font-size: .8rem; }
     .social-links { display: flex; gap: 12px; }
-    .social-links a {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.15);
-      display: grid; place-items: center; font-size: 1rem;
-      text-decoration: none; transition: border-color .2s, background .2s;
-    }
+    .social-links a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); display: grid; place-items: center; font-size: 1rem; text-decoration: none; transition: border-color .2s, background .2s; }
     .social-links a:hover { border-color: var(--red); background: rgba(224,32,32,.15); }
 
-    /* ── MOBILE ── */
+    /* MOBILE */
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
@@ -292,30 +274,25 @@
       .cta-banner { flex-direction: column; }
       .guard-card { flex-wrap: wrap; }
       .guard-price { width: 100%; text-align: left; }
+      .form-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .footer-grid { grid-template-columns: 1fr; }
       .hero-stats { gap: 20px; }
     }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    .hero-content > * { animation: fadeUp .6s ease both; }
-    .hero-badge { animation-delay: .05s; }
-    .hero h1 { animation-delay: .15s; }
-    .hero p { animation-delay: .25s; }
-    .search-bar { animation-delay: .35s; }
-    .hero-stats { animation-delay: .45s; }
+    @keyframes fadeUpHero { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-content > * { animation: fadeUpHero .6s ease both; }
+    .hero-badge{animation-delay:.05s}.hero h1{animation-delay:.15s}
+    .hero p{animation-delay:.25s}.search-bar{animation-delay:.35s}.hero-stats{animation-delay:.45s}
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <a class="logo" href="#">
-    <div class="logo-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-    </div>
+    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
     <span class="logo-text">SecureHire</span>
   </a>
   <ul class="nav-links">
@@ -325,11 +302,25 @@
     <li><a href="#why">Why Us</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="nav-cta">Book Now</button>
+  <button class="nav-cta" onclick="openModal('Amit Singh','🧑‍💼','₹600')">Book Now</button>
   <div class="hamburger"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- LOCATION BAR -->
+<div class="location-bar">
+  <span class="loc-label">📍 Booking From:</span>
+  <div class="loc-display">
+    <span id="loc-text">Detecting your location…</span>
+  </div>
+  <button class="loc-detect-btn" onclick="detectLocation()">
+    📡 Use My Location
+  </button>
+  <span class="loc-detecting" id="loc-loading">
+    <span class="spinner"></span> Detecting…
+  </span>
+</div>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-badge">
@@ -340,8 +331,8 @@
     <p>Professional, background-checked security personnel for VIPs, celebrities, politicians, corporates, and everyday protection needs. Available 24/7 across India.</p>
     <div class="search-bar">
       <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="#9CA3AF" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-      <input type="text" placeholder="Search by city, category, or guard name…"/>
-      <button class="search-btn">Search</button>
+      <input type="text" id="search-input" placeholder="Search by city, category, or guard name…"/>
+      <button class="search-btn" onclick="handleSearch()">Search</button>
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="stat-num">2,400+</div><div class="stat-label">Verified Guards</div></div>
@@ -352,163 +343,82 @@
   </div>
 </section>
 
-<!-- ── CATEGORIES ── -->
+<!-- CATEGORIES -->
 <section id="categories">
   <div class="section-header">
-    <div>
-      <h2>Categories</h2>
-      <p>Find the right protection for every need</p>
-    </div>
-    <a href="#" class="see-all">See all →</a>
+    <div><h2>Categories</h2><p>Find the right protection for every need</p></div>
+    <a href="#guards" class="see-all">See all →</a>
   </div>
   <div class="categories-grid">
-    <div class="cat-card"><div class="cat-icon c1">👔</div><span>VIP Protection</span></div>
-    <div class="cat-card"><div class="cat-icon c2">🎉</div><span>Event Security</span></div>
-    <div class="cat-card"><div class="cat-icon c3">🛡️</div><span>Personal Guard</span></div>
-    <div class="cat-card"><div class="cat-icon c4">🏢</div><span>Corporate</span></div>
-    <div class="cat-card"><div class="cat-icon c5">🏠</div><span>Residential</span></div>
-    <div class="cat-card"><div class="cat-icon c6">✈️</div><span>Travel Security</span></div>
-    <div class="cat-card"><div class="cat-icon c7">🗳️</div><span>Election &amp; Political</span></div>
-    <div class="cat-card"><div class="cat-icon c8">🎬</div><span>Celebrity &amp; Film</span></div>
-    <div class="cat-card"><div class="cat-icon c9">🚗</div><span>Close Protection &amp; Driver</span></div>
-    <div class="cat-card"><div class="cat-icon c10">👩</div><span>Female Guard</span></div>
-    <div class="cat-card"><div class="cat-icon c11">🏥</div><span>Medical Escort</span></div>
-    <div class="cat-card"><div class="cat-icon c12">🌙</div><span>Night Security</span></div>
+    <div class="cat-card" onclick="filterGuards('VIP Protection')"><div class="cat-icon c1">👔</div><span>VIP Protection</span></div>
+    <div class="cat-card" onclick="filterGuards('Event Security')"><div class="cat-icon c2">🎉</div><span>Event Security</span></div>
+    <div class="cat-card" onclick="filterGuards('Personal Guard')"><div class="cat-icon c3">🛡️</div><span>Personal Guard</span></div>
+    <div class="cat-card" onclick="filterGuards('Corporate')"><div class="cat-icon c4">🏢</div><span>Corporate</span></div>
+    <div class="cat-card" onclick="filterGuards('Residential')"><div class="cat-icon c5">🏠</div><span>Residential</span></div>
+    <div class="cat-card" onclick="filterGuards('Travel Security')"><div class="cat-icon c6">✈️</div><span>Travel Security</span></div>
+    <div class="cat-card" onclick="filterGuards('Political Security')"><div class="cat-icon c7">🗳️</div><span>Election &amp; Political</span></div>
+    <div class="cat-card" onclick="filterGuards('Celebrity')"><div class="cat-icon c8">🎬</div><span>Celebrity &amp; Film</span></div>
+    <div class="cat-card" onclick="filterGuards('Close Protection')"><div class="cat-icon c9">🚗</div><span>Close Protection &amp; Driver</span></div>
+    <div class="cat-card" onclick="filterGuards('Female Guard')"><div class="cat-icon c10">👩</div><span>Female Guard</span></div>
+    <div class="cat-card" onclick="filterGuards('Medical Escort')"><div class="cat-icon c11">🏥</div><span>Medical Escort</span></div>
+    <div class="cat-card" onclick="filterGuards('Night Security')"><div class="cat-icon c12">🌙</div><span>Night Security</span></div>
   </div>
 </section>
 
-<!-- ── FEATURED GUARDS ── -->
+<!-- FEATURED GUARDS -->
 <section id="guards" style="background: var(--grey);">
   <div class="section-header">
-    <div>
-      <h2>Featured Guards</h2>
-      <p>Highly rated professionals</p>
-    </div>
-    <a href="#" class="see-all">View all →</a>
+    <div><h2>Featured Guards</h2><p>Highly rated professionals</p></div>
+    <a href="#" class="see-all" onclick="resetFilter(); return false;">View all →</a>
   </div>
-  <div class="guards-grid">
-
-    <!-- Guard 1 -->
-    <div class="guard-card">
-      <div class="guard-img-wrap">
-        <div class="guard-img">🧑‍💼</div>
-        <div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-      </div>
+  <div class="guards-grid" id="guards-grid">
+    <div class="guard-card" data-tags="VIP Protection,Travel Security">
+      <div class="guard-img-wrap"><div class="guard-img">🧑‍💼</div><div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div></div>
       <div class="guard-info">
-        <div class="guard-top">
-          <span class="guard-name">Amit Singh</span>
-          <span class="featured-tag">Featured</span>
-        </div>
-        <div class="rating">
-          <span class="rating-score">⭐ 5.0</span>
-          <span class="rating-reviews">28 reviews</span>
-        </div>
+        <div class="guard-top"><span class="guard-name">Amit Singh</span><span class="featured-tag">Featured</span></div>
+        <div class="rating"><span class="rating-score">⭐ 5.0</span><span class="rating-reviews">28 reviews</span></div>
         <div class="guard-meta">📍 Bangalore &nbsp;•&nbsp; 10 yrs exp</div>
-        <div class="guard-tags">
-          <span class="tag">VIP Protection</span>
-          <span class="tag">Travel Security</span>
-        </div>
+        <div class="guard-tags"><span class="tag">VIP Protection</span><span class="tag">Travel Security</span></div>
       </div>
-      <div class="guard-price">
-        <div class="price-num">₹600</div>
-        <div class="price-label">per hour</div>
-        <button class="book-btn">Book</button>
-      </div>
+      <div class="guard-price"><div class="price-num">₹600</div><div class="price-label">per hour</div><button class="book-btn" onclick="openModal('Amit Singh','🧑‍💼','₹600/hr')">Book</button></div>
     </div>
-
-    <!-- Guard 2 -->
-    <div class="guard-card">
-      <div class="guard-img-wrap">
-        <div class="guard-img">👮</div>
-        <div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-      </div>
+    <div class="guard-card" data-tags="Political Security,Event Security">
+      <div class="guard-img-wrap"><div class="guard-img">👮</div><div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div></div>
       <div class="guard-info">
-        <div class="guard-top">
-          <span class="guard-name">Rajesh Kumar</span>
-          <span class="featured-tag">Featured</span>
-        </div>
-        <div class="rating">
-          <span class="rating-score">⭐ 4.9</span>
-          <span class="rating-reviews">47 reviews</span>
-        </div>
+        <div class="guard-top"><span class="guard-name">Rajesh Kumar</span><span class="featured-tag">Featured</span></div>
+        <div class="rating"><span class="rating-score">⭐ 4.9</span><span class="rating-reviews">47 reviews</span></div>
         <div class="guard-meta">📍 Delhi &nbsp;•&nbsp; 14 yrs exp</div>
-        <div class="guard-tags">
-          <span class="tag">Political Security</span>
-          <span class="tag">Event Security</span>
-        </div>
+        <div class="guard-tags"><span class="tag">Political Security</span><span class="tag">Event Security</span></div>
       </div>
-      <div class="guard-price">
-        <div class="price-num">₹750</div>
-        <div class="price-label">per hour</div>
-        <button class="book-btn">Book</button>
-      </div>
+      <div class="guard-price"><div class="price-num">₹750</div><div class="price-label">per hour</div><button class="book-btn" onclick="openModal('Rajesh Kumar','👮','₹750/hr')">Book</button></div>
     </div>
-
-    <!-- Guard 3 -->
-    <div class="guard-card">
-      <div class="guard-img-wrap">
-        <div class="guard-img">🕵️</div>
-        <div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-      </div>
+    <div class="guard-card" data-tags="Female Guard,Celebrity">
+      <div class="guard-img-wrap"><div class="guard-img">🕵️</div><div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div></div>
       <div class="guard-info">
-        <div class="guard-top">
-          <span class="guard-name">Priya Sharma</span>
-          <span class="featured-tag">Featured</span>
-        </div>
-        <div class="rating">
-          <span class="rating-score">⭐ 4.8</span>
-          <span class="rating-reviews">33 reviews</span>
-        </div>
+        <div class="guard-top"><span class="guard-name">Priya Sharma</span><span class="featured-tag">Featured</span></div>
+        <div class="rating"><span class="rating-score">⭐ 4.8</span><span class="rating-reviews">33 reviews</span></div>
         <div class="guard-meta">📍 Mumbai &nbsp;•&nbsp; 8 yrs exp</div>
-        <div class="guard-tags">
-          <span class="tag">Female Guard</span>
-          <span class="tag">Celebrity Protection</span>
-        </div>
+        <div class="guard-tags"><span class="tag">Female Guard</span><span class="tag">Celebrity Protection</span></div>
       </div>
-      <div class="guard-price">
-        <div class="price-num">₹680</div>
-        <div class="price-label">per hour</div>
-        <button class="book-btn">Book</button>
-      </div>
+      <div class="guard-price"><div class="price-num">₹680</div><div class="price-label">per hour</div><button class="book-btn" onclick="openModal('Priya Sharma','🕵️','₹680/hr')">Book</button></div>
     </div>
-
-    <!-- Guard 4 -->
-    <div class="guard-card">
-      <div class="guard-img-wrap">
-        <div class="guard-img">🧔</div>
-        <div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-      </div>
+    <div class="guard-card" data-tags="Corporate,Close Protection">
+      <div class="guard-img-wrap"><div class="guard-img">🧔</div><div class="verified-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div></div>
       <div class="guard-info">
-        <div class="guard-top">
-          <span class="guard-name">Vikram Thakur</span>
-          <span class="featured-tag">Top Rated</span>
-        </div>
-        <div class="rating">
-          <span class="rating-score">⭐ 4.7</span>
-          <span class="rating-reviews">61 reviews</span>
-        </div>
+        <div class="guard-top"><span class="guard-name">Vikram Thakur</span><span class="featured-tag">Top Rated</span></div>
+        <div class="rating"><span class="rating-score">⭐ 4.7</span><span class="rating-reviews">61 reviews</span></div>
         <div class="guard-meta">📍 Hyderabad &nbsp;•&nbsp; 12 yrs exp</div>
-        <div class="guard-tags">
-          <span class="tag">Corporate</span>
-          <span class="tag">Close Protection</span>
-        </div>
+        <div class="guard-tags"><span class="tag">Corporate</span><span class="tag">Close Protection</span></div>
       </div>
-      <div class="guard-price">
-        <div class="price-num">₹550</div>
-        <div class="price-label">per hour</div>
-        <button class="book-btn">Book</button>
-      </div>
+      <div class="guard-price"><div class="price-num">₹550</div><div class="price-label">per hour</div><button class="book-btn" onclick="openModal('Vikram Thakur','🧔','₹550/hr')">Book</button></div>
     </div>
-
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
+<!-- HOW IT WORKS -->
 <section id="how" style="padding: 70px 5%;">
   <div class="how-it-works">
-    <div class="section-header">
-      <div><h2>How It Works</h2><p>Hire a guard in under 5 minutes</p></div>
-    </div>
+    <div class="section-header"><div><h2>How It Works</h2><p>Hire a guard in under 5 minutes</p></div></div>
     <div class="steps-grid">
       <div class="step"><div class="step-num">1</div><h3>Search &amp; Browse</h3><p>Enter your city and required service. Browse verified, rated guards in your area.</p></div>
       <div class="step"><div class="step-num">2</div><h3>Choose Your Guard</h3><p>Review profiles, experience, ratings, and hourly rates to find the best fit.</p></div>
@@ -518,11 +428,9 @@
   </div>
 </section>
 
-<!-- ── WHY ── -->
+<!-- WHY -->
 <section id="why" style="background: var(--grey);">
-  <div class="section-header">
-    <div><h2>Why SecureHire?</h2><p>Trusted by thousands across India</p></div>
-  </div>
+  <div class="section-header"><div><h2>Why SecureHire?</h2><p>Trusted by thousands across India</p></div></div>
   <div class="why-grid">
     <div class="why-card"><div class="why-icon">✅</div><h3>Background Verified</h3><p>Every guard undergoes thorough police verification, identity checks, and reference screening before listing.</p></div>
     <div class="why-card"><div class="why-icon">⚡</div><h3>Instant Booking</h3><p>Book a guard within minutes. Emergency same-day deployment available in 50+ cities.</p></div>
@@ -533,12 +441,10 @@
   </div>
 </section>
 
-<!-- ── TESTIMONIALS ── -->
+<!-- TESTIMONIALS -->
 <section style="padding: 70px 5%;">
   <div class="testimonials">
-    <div class="section-header">
-      <div><h2>What Clients Say</h2><p style="color:rgba(255,255,255,.65)">Real experiences from real customers</p></div>
-    </div>
+    <div class="section-header"><div><h2>What Clients Say</h2><p style="color:rgba(255,255,255,.7)">Real experiences from real customers</p></div></div>
     <div class="testi-grid">
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
@@ -559,7 +465,7 @@
   </div>
 </section>
 
-<!-- ── CTA ── -->
+<!-- CTA -->
 <section style="padding: 0 0 70px;">
   <div class="cta-banner">
     <div>
@@ -567,13 +473,13 @@
       <p>Join over 50,000 clients who rely on SecureHire for professional protection.</p>
     </div>
     <div class="cta-actions">
-      <button class="btn-primary">Book a Guard Now</button>
+      <button class="btn-primary" onclick="openModal('Amit Singh','🧑‍💼','₹600/hr')">Book a Guard Now</button>
       <button class="btn-outline">Register as Guard</button>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer id="contact">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -583,60 +489,236 @@
       </a>
       <p>India's most trusted platform for booking verified bodyguards and security personnel — for individuals, corporates, and VIPs.</p>
     </div>
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li><a href="#">VIP Protection</a></li>
-        <li><a href="#">Event Security</a></li>
-        <li><a href="#">Political Guard</a></li>
-        <li><a href="#">Corporate Security</a></li>
-        <li><a href="#">Travel Protection</a></li>
-        <li><a href="#">Female Guard</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Partners</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Support</h4>
-      <ul>
-        <li><a href="#">Help Centre</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="mailto:hello@securehire.in">hello@securehire.in</a></li>
-        <li><a href="tel:+918000000000">+91 80000 00000</a></li>
-      </ul>
-    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="#">VIP Protection</a></li><li><a href="#">Event Security</a></li><li><a href="#">Political Guard</a></li><li><a href="#">Corporate Security</a></li><li><a href="#">Travel Protection</a></li><li><a href="#">Female Guard</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Press</a></li><li><a href="#">Partners</a></li></ul></div>
+    <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Help Centre</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="mailto:hello@securehire.in">hello@securehire.in</a></li><li><a href="tel:+918000000000">+91 80000 00000</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 SecureHire. All rights reserved.</p>
     <div class="social-links">
-      <a href="#" title="Twitter">🐦</a>
-      <a href="#" title="Instagram">📸</a>
-      <a href="#" title="LinkedIn">💼</a>
-      <a href="#" title="WhatsApp">💬</a>
+      <a href="#" title="Twitter">🐦</a><a href="#" title="Instagram">📸</a>
+      <a href="#" title="LinkedIn">💼</a><a href="#" title="WhatsApp">💬</a>
     </div>
   </div>
 </footer>
 
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+
+    <!-- Step 1: Details -->
+    <div class="modal-step active" id="step1">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="step-indicator">
+        <div class="step-dot active" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+      </div>
+      <div class="modal-title">Book Your Guard</div>
+      <div class="modal-sub">Fill in your details to proceed</div>
+      <div class="modal-guard-info">
+        <div class="modal-guard-emoji" id="modal-emoji">🧑‍💼</div>
+        <div><div class="modal-guard-name" id="modal-name">Amit Singh</div><div class="modal-guard-rate" id="modal-rate">₹600/hr • VIP Protection</div></div>
+      </div>
+      <div class="form-group"><label>Your Full Name</label><input type="text" id="f-name" placeholder="e.g. Rahul Sharma"/></div>
+      <div class="form-group"><label>Mobile Number</label><input type="tel" id="f-phone" placeholder="+91 98765 43210"/></div>
+      <div class="form-group"><label>Booking Location</label><input type="text" id="f-location" placeholder="City or full address"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Date</label><input type="date" id="f-date"/></div>
+        <div class="form-group"><label>Duration (hours)</label><input type="number" id="f-hours" min="1" max="24" placeholder="4"/></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-back" onclick="closeModal()">Cancel</button>
+        <button class="btn-modal-next" onclick="goStep(2)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Confirm -->
+    <div class="modal-step" id="step2">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="step-indicator">
+        <div class="step-dot done" id="dot1b"></div>
+        <div class="step-dot active" id="dot2b"></div>
+        <div class="step-dot" id="dot3b"></div>
+      </div>
+      <div class="modal-title">Confirm Booking</div>
+      <div class="modal-sub">Review your booking details</div>
+      <div id="summary-box"></div>
+      <div class="modal-footer">
+        <button class="btn-modal-back" onclick="goStep(1)">← Back</button>
+        <button class="btn-modal-next" onclick="goStep(3)">Proceed to Pay →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Payment Coming Soon -->
+    <div class="modal-step" id="step3">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="step-indicator">
+        <div class="step-dot done"></div>
+        <div class="step-dot done"></div>
+        <div class="step-dot active"></div>
+      </div>
+      <div class="coming-soon-box">
+        <div class="cs-icon">🔐</div>
+        <h3>Payment Coming Soon!</h3>
+        <p>We're building a secure UPI, Card & Net Banking payment gateway. Your booking details have been saved. We'll notify you as soon as payments go live!</p>
+        <button class="notify-btn" onclick="notifyMe()">🔔 Notify Me When Live</button>
+      </div>
+      <div class="modal-footer" style="margin-top:16px">
+        <button class="btn-modal-back" onclick="goStep(2)">← Back</button>
+        <button class="btn-modal-next" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
-  // Smooth scroll for nav links
+  // ── LOCATION DETECTION ──
+  function detectLocation() {
+    const btn = document.querySelector('.loc-detect-btn');
+    const loading = document.getElementById('loc-loading');
+    const locText = document.getElementById('loc-text');
+    const fLocation = document.getElementById('f-location');
+
+    btn.style.display = 'none';
+    loading.style.display = 'flex';
+
+    if (!navigator.geolocation) {
+      locText.textContent = 'Geolocation not supported';
+      btn.style.display = 'flex';
+      loading.style.display = 'none';
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords;
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+          );
+          const data = await res.json();
+          const city = data.address.city || data.address.town || data.address.village || data.address.county || '';
+          const state = data.address.state || '';
+          const display = city ? `${city}, ${state}` : data.display_name.split(',').slice(0,2).join(',');
+          locText.textContent = '📍 ' + display;
+          locText.style.color = '#0A0A0A';
+          if (fLocation) fLocation.value = display;
+        } catch(e) {
+          locText.textContent = 'Location detected (coordinates saved)';
+        }
+        btn.style.display = 'flex';
+        btn.textContent = '🔄 Update Location';
+        loading.style.display = 'none';
+      },
+      (err) => {
+        locText.textContent = 'Could not detect location. Enter manually.';
+        btn.style.display = 'flex';
+        loading.style.display = 'none';
+      }
+    );
+  }
+
+  // Auto-detect on page load
+  window.addEventListener('load', () => {
+    setTimeout(detectLocation, 800);
+  });
+
+  // ── SEARCH ──
+  function handleSearch() {
+    const q = document.getElementById('search-input').value.trim().toLowerCase();
+    if (!q) return;
+    document.getElementById('guards').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => filterByText(q), 400);
+  }
+
+  function filterByText(q) {
+    document.querySelectorAll('#guards-grid .guard-card').forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(q) ? 'flex' : 'none';
+    });
+  }
+
+  function filterGuards(category) {
+    document.getElementById('guards').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      document.querySelectorAll('#guards-grid .guard-card').forEach(card => {
+        const tags = card.getAttribute('data-tags') || '';
+        card.style.display = tags.includes(category) ? 'flex' : 'none';
+      });
+    }, 400);
+  }
+
+  function resetFilter() {
+    document.querySelectorAll('#guards-grid .guard-card').forEach(card => {
+      card.style.display = 'flex';
+    });
+  }
+
+  // ── MODAL ──
+  let currentGuardName = '', currentGuardEmoji = '', currentGuardRate = '';
+
+  function openModal(name, emoji, rate) {
+    currentGuardName = name; currentGuardEmoji = emoji; currentGuardRate = rate;
+    document.getElementById('modal-name').textContent = name;
+    document.getElementById('modal-emoji').textContent = emoji;
+    document.getElementById('modal-rate').textContent = rate;
+    // Pre-fill location if detected
+    const loc = document.getElementById('loc-text').textContent.replace('📍 ','');
+    const fLoc = document.getElementById('f-location');
+    if (fLoc && loc && !loc.includes('Detecting') && !loc.includes('Could not')) fLoc.value = loc;
+    goStep(1);
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  function goStep(n) {
+    document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    if (n === 2) buildSummary();
+  }
+
+  function buildSummary() {
+    const name = document.getElementById('f-name').value || '—';
+    const phone = document.getElementById('f-phone').value || '—';
+    const loc = document.getElementById('f-location').value || '—';
+    const date = document.getElementById('f-date').value || '—';
+    const hours = parseInt(document.getElementById('f-hours').value) || 1;
+    const rateNum = parseInt((currentGuardRate || '600').replace(/[^0-9]/g,'')) || 600;
+    const total = rateNum * hours;
+
+    document.getElementById('summary-box').innerHTML = `
+      <div style="background:#F9FAFB;border-radius:12px;padding:16px;margin-bottom:4px">
+        <div class="summary-row"><span>Guard</span><span>${currentGuardEmoji} ${currentGuardName}</span></div>
+        <div class="summary-row"><span>Client</span><span>${name}</span></div>
+        <div class="summary-row"><span>Phone</span><span>${phone}</span></div>
+        <div class="summary-row"><span>Location</span><span>${loc}</span></div>
+        <div class="summary-row"><span>Date</span><span>${date}</span></div>
+        <div class="summary-row"><span>Duration</span><span>${hours} hour${hours>1?'s':''}</span></div>
+        <div class="summary-row"><span>Rate</span><span>${currentGuardRate}</span></div>
+        <div class="summary-row"><span>Estimated Total</span><span>₹${total.toLocaleString('en-IN')}</span></div>
+      </div>`;
+  }
+
+  function notifyMe() {
+    alert('🎉 You\'ll be notified at your number when payments go live!');
+    closeModal();
+  }
+
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     });
-  });
-  // Book buttons
-  document.querySelectorAll('.book-btn, .btn-primary, .search-btn, .nav-cta').forEach(btn => {
-    btn.addEventListener('click', () => alert('Booking feature coming soon! 🛡️'));
   });
 </script>
 </body>
